@@ -1,12 +1,6 @@
 .heading {
-    background-color: brown;
-    color: #f9fbf9d4;
-}
-
-.cyan {
-    color: cyan;
-}
-
-.yellow {
-    background-color: bisque;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.4rem;
 }
