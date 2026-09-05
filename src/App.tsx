@@ -1,3 +1,5 @@
+import { Heading } from './components/Heading';
+
 import './styles/globalStyles.css';
 import './styles/theme.css';
 
@@ -6,7 +8,7 @@ export function App() {
 
   return (
     <div>
-      <h1>Olá Mundo</h1>
+      <Heading />
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel soluta eos
         sequi repellat vitae iusto hic. Quod exercitationem pariatur sed sint
