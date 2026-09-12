@@ -1,5 +1,14 @@
-import st from './styles.module.css';
+
+import { useContext } from 'react';
+import { TaskContext } from '../../contexts/TaskContext';
+
 
 export const CountDown = () => {
-  return <div className={st.container}>00:00</div>;
-}
+  const taskContext = useContext(TaskContext);
+  console.log(taskContext)
+  // const { state } = usePomodoroContext();
+  
+  // return (
+  //   <div className={st.container}>{state.formattedSecondsRemaining}</div>
+  
+};

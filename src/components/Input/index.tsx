@@ -1,3 +1,4 @@
+import type React from 'react';
 import st from './styles.module.css';
 
 type InputProps = {
@@ -5,7 +6,7 @@ type InputProps = {
   labelText: string;
 } & React.ComponentProps<'input'>;
 
-export function Input({id, type, labelText, ...rest}: InputProps) {
+export function Input({ id, type, labelText, ...rest }: InputProps) {
   return (
     <>
       <label htmlFor={id}>{labelText}</label>
