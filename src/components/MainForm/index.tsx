@@ -4,8 +4,12 @@ import { Cycles } from '../Cycles';
 import { Input } from '../Input';
 
 export function MainForm() {
+  const handleCreateNewTask = (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('Deu Certo');
+  };
   return (
-    <form className='form' action=''>
+    <form onSubmit={handleCreateNewTask} className='form' action=''>
       <div className='formRow'>
         <Input
           labelText='task'
