@@ -8,6 +8,8 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycleType';
 import { getNextCycleType } from '../../utils/getNextCycle';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskAction';
+import { Tips } from '../Tips';
+
 
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
@@ -38,13 +40,12 @@ export function MainForm() {
       type: nextCycleType,
     };
 
-    dispatch ({ type: TaskActionTypes.START_TASK, payload: newTask});
-    
+    dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
+   
   };
-  
+
   const handleInterruptTask = () => {
-    dispatch ({ type: TaskActionTypes.INTERRUPT_TASK});
-    
+    dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
   };
 
   return (
@@ -60,7 +61,7 @@ export function MainForm() {
         />
       </div>
       <div className='formRow'>
-        <p>Próximo intervalo é de 25min</p>
+        <Tips />
       </div>
       {state.currentCycle > 0 && (
         <div className='formRow'>

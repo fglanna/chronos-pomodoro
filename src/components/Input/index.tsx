@@ -10,7 +10,7 @@ export function Input({ id, type, labelText, ...rest }: InputProps) {
   return (
     <>
       <label htmlFor={id}>{labelText}</label>
-      <input className={st.input} id={id} type={type} {...rest} />
+      <input className={st.input} id={id} type={type} {...rest} autoComplete='off' />
     </>
   );
 }
