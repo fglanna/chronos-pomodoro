@@ -37,9 +37,6 @@ export const Menu = () => {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    return () => {
-      console.log('Look, this component will be updated');
-    };
   }, [theme]);
 
   return (
