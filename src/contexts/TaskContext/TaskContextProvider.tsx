@@ -5,16 +5,42 @@ import { taskReducer } from './taskReducer';
 import { TimerWorkerManager } from '../../workers/TimerWorkerManager';
 import { TaskActionTypes } from './taskAction';
 import { loadBeep } from '../../utils/loudBeep';
+import type { TaskStateModel } from '../../models/TaskStateModel';
 
 type TaskContextProviderProps = {
   children: React.ReactNode;
 };
 
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
-  const [state, dispatch] = useReducer(taskReducer, initialTaskState);
+  const [state, dispatch] = useReducer(taskReducer, initialTaskState, () => {
+    const storageState = localStorage.getItem('state');
+
+    if (storageState === null) return initialTaskState;
+
+    const parsedStorageState = JSON.parse(storageState) as TaskStateModel;
+
+    return {
+      ...parsedStorageState,
+      activeTask: null,
+      secondsRemaining: 0,
+      formattedSecondsRemaining: '00:00', 
+    };
+  });
   const playBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null);
 
   const worker = TimerWorkerManager.getInstance();
+
+  useEffect(() => {
+    if (state.activeTask && state.formattedSecondsRemaining) {
+      document.title = `${state.formattedSecondsRemaining} - Chronos Pomodoro`;
+    } else {
+      document.title = 'Chronos Pomodoro';
+    }
+  }, [state.formattedSecondsRemaining, state.activeTask]);
+
+  useEffect(() => {
+    localStorage.setItem('state', JSON.stringify(state));
+  }, [state]);
 
   useEffect(() => {
     if (!state.activeTask) {
@@ -39,6 +65,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
           payload: { secondsRemaining: countDownSeconds },
         });
       }
+      document.title = `${state.formattedSecondsRemaining} - Chronos Pomodoro`;
     });
 
     worker.postMessage(state);
@@ -52,7 +79,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
   useEffect(() => {
     if (state.activeTask && playBeepRef.current === null) {
       playBeepRef.current = loadBeep();
-    } else {     
+    } else {
       playBeepRef.current = null;
     }
   }, [state.activeTask]);
