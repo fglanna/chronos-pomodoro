@@ -28,5 +28,4 @@ export function Dialog({ closeToast, data}: ToastContentProps<string>) {
     
     </>
   )
-
 }

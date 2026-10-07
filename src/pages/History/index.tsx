@@ -27,6 +27,7 @@ export function History() {
   );
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSortTasksOptions(prev => ({
       ...prev,
       tasks: sortTasks({
@@ -39,10 +40,17 @@ export function History() {
 
   useEffect(() => {
     if (!confirmClearHistory) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setConfirmClearHistory(false);
 
     dispatch({ type: TaskActionTypes.RESET_STATE });
   }, [confirmClearHistory, dispatch]);
+
+  useEffect(() => {
+    return () => {
+      showMessage.dismiss();
+    };
+  });
 
   function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
     const newDirection = sortTasksOptions.direction === 'desc' ? 'asc' : 'desc';

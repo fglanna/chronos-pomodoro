@@ -9,14 +9,11 @@ self.onmessage = function (event) {
   const { activeTask, secondsRemaining } = state;
 
   const endDate = activeTask.startDate + secondsRemaining * 1000;
-  const now = Date.now();
-  let countDownSeconds = Math.ceil((endDate - now) / 1000);
 
   function tick() {
-    self.postMessage(countDownSeconds);
-
     const now = Date.now();
-    countDownSeconds = Math.floor((endDate - now) / 1000);
+    let countDownSeconds = Math.round((endDate - now) / 1000);
+    self.postMessage(countDownSeconds);
 
     // Se o tempo chegou ao fim ou passou de 0, não agenda novo tick
     if (countDownSeconds <= 0) {
