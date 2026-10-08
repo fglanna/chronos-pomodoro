@@ -38,6 +38,10 @@ export function History() {
     }));
   }, [state.tasks]);
 
+   useEffect(() => {
+     document.title = 'Histórico - Chronos Pomodoro';
+   }, []);
+
   useEffect(() => {
     if (!confirmClearHistory) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect

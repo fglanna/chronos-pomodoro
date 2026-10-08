@@ -24,7 +24,10 @@ export function AboutPomodoro() {
             garantir descansos para evitar o cansaço mental.
           </p>
 
-          <img src='https://placehold.co/1920x1080' alt='' />
+          <img
+            src='/images/favicon/pomodoro-cycle.png'
+            alt='Diagrama explicativo da técnica Pomodoro'
+          />
 
           <h2>Como funciona o Pomodoro tradicional?</h2>
           <ul>
